@@ -7,24 +7,26 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		Main main = new Main();
+
 		// call the method which executes the program
-		List<Long> res = doIt(System.in);
-		
+		List<Long> res = main.doIt(System.in);
+
 		// print the result
-		for(Long entry : res) {
+		for (Long entry : res) {
 			System.out.println(entry);
 		}
 	}
 
-	public static List<Long> doIt(InputStream is) {
+	public List<Long> doIt(InputStream is) {
 		List<Long> res = new ArrayList<Long>();
-		
+
 		Scanner in = null;
 		try {
 			in = new Scanner(is);
 			// first we need to get rid of the first line
 			int nrOfLines = in.nextInt();
-			
+
 			while (in.hasNextInt()) {
 				// read the values out of the stream
 				int i = in.nextInt();
@@ -36,14 +38,14 @@ public class Main {
 				// store the values in an array
 				res.add(calculateR(i, a, b, c, d));
 			}
-			
-			if(nrOfLines != res.size())
+
+			if (nrOfLines != res.size())
 				throw new RuntimeException("Number of results do not match number of inputs!");
 		} finally {
-			if(in != null)
+			if (in != null)
 				in.close();
 		}
-		
+
 		return res;
 	}
 
