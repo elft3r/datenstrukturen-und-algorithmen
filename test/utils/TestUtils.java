@@ -50,13 +50,13 @@ public class TestUtils {
 
 		// execute the test by invoking the doIt method in the clazzToTest
 		Method doIt = clazzToTest.getMethod("doIt", InputStream.class);
-		List<Long> res = (List<Long>) doIt.invoke(clazzToTest.newInstance(), isIn);
+		Object res = doIt.invoke(clazzToTest.newInstance(), isIn);
 
 		// now we compare the calculated results with the expected
-		assertResult(outFile, res, testClazz);
+		assertResult(outFile, (List<? extends Object>) res, testClazz);
 	}
 
-	public static void assertResult(String filename, List<Long> res, Class<? extends Object> testClazz)
+	public static void assertResult(String filename, List<? extends Object> res, Class<? extends Object> testClazz)
 			throws FileNotFoundException {
 		List<String> expectedRes = TestUtils.getFileContent(filename, testClazz);
 
