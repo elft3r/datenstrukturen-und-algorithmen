@@ -62,6 +62,6 @@ public class TestUtils {
 
 		assertEquals("Should be the same number of results!", expectedRes.size(), res.size());
 		for (int i = 0; i < res.size(); i++)
-			assertEquals("Result in line " + i + " are not the same!", expectedRes.get(i), res.get(i).toString());
+			assertEquals("Result in line " + i + " are not the same!", expectedRes.get(i).trim(), res.get(i).toString());
 	}
 }
