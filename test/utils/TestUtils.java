@@ -50,10 +50,15 @@ public class TestUtils {
 
 		// execute the test by invoking the doIt method in the clazzToTest
 		Method doIt = clazzToTest.getMethod("doIt", InputStream.class);
-		Object res = doIt.invoke(clazzToTest.newInstance(), isIn);
+		try {
+			Object res = doIt.invoke(clazzToTest.newInstance(), isIn);
 
-		// now we compare the calculated results with the expected
-		assertResult(outFile, (List<? extends Object>) res, testClazz);
+			// now we compare the calculated results with the expected
+			assertResult(outFile, (List<? extends Object>) res, testClazz);
+		} catch (Exception e) {
+			// we want to get the cause of the InvocationTargetException
+			throw (Exception)e.getCause();
+		}
 	}
 
 	public static void assertResult(String filename, List<? extends Object> res, Class<? extends Object> testClazz)
